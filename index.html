@@ -14,6 +14,8 @@
         }
         body {
             overflow: hidden;
+            /* Safe area for iPhone notch/home indicator */
+            padding-bottom: env(safe-area-inset-bottom);
         }
         .modal {
             display: none;
@@ -51,7 +53,9 @@
             <div class="flex items-center justify-between p-3" style="background: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);">
                 <div class="flex items-center space-x-2">
                     <div class="bg-yellow-400 p-1 rounded">
-                        <svg class="h-4 w-4" viewBox="0 0 100 100" fill="#0066B3">
+                        <!-- Replace this with your logo image -->
+                        <img src="logo.png" alt="Cholon.vn" class="h-4 w-4" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <svg class="h-4 w-4 hidden" viewBox="0 0 100 100" fill="#0066B3">
                             <text x="50" y="70" font-size="60" font-weight="bold" text-anchor="middle" fill="#0066B3">C</text>
                         </svg>
                     </div>
@@ -76,7 +80,7 @@
         </div>
 
         <!-- Right Side - Compact Product Info -->
-        <div class="absolute right-3 bottom-32 z-40 product-mini">
+        <div class="absolute right-3 z-40 product-mini" style="bottom: calc(85px + env(safe-area-inset-bottom));">
             <div class="bg-white/95 backdrop-blur rounded-2xl p-3 shadow-2xl max-w-[140px]">
                 <div class="relative mb-2">
                     <img 
@@ -106,7 +110,7 @@
 
         <!-- Bottom Action Bar - Clean & Accessible -->
         <div class="absolute bottom-0 left-0 right-0 z-50">
-            <div class="px-3 pb-6 pt-4" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+            <div class="px-3 pt-4" style="padding-bottom: max(24px, env(safe-area-inset-bottom)); background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
                 <div class="flex items-center space-x-2">
                     <button
                         onclick="openLeadForm()"
