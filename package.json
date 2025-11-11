@@ -1,0 +1,13 @@
+{
+  "name": "cholon-live",
+  "version": "1.0.0",
+  "description": "Cholon.vn Livestream Shopping Platform",
+  "main": "index.html",
+  "scripts": {
+    "start": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "keywords": ["livestream", "shopping", "ecommerce"],
+  "author": "Cholon.vn",
+  "license": "MIT"
+}
