@@ -50,24 +50,16 @@
 
         <!-- Top Bar - Minimal & Clean -->
         <div class="absolute top-0 left-0 right-0 z-40">
-            <div class="flex items-center justify-between p-3" style="background: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);">
+            <div class="flex items-center justify-between p-3 pt-4" style="background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);">
                 <div class="flex items-center space-x-2">
-                    <div class="bg-yellow-400 p-1.5 rounded-md flex items-center justify-center" style="min-width: 28px; min-height: 28px;">
-                        <!-- Logo -->
+                    <div class="flex items-center justify-center">
                         <img 
                             src="logo.png" 
                             alt="Cholon.vn" 
-                            class="h-5 w-auto object-contain"
-                            style="max-width: 60px; display: block;"
+                            class="h-7 w-auto object-contain"
                         >
                     </div>
-                    <div>
-                        <div class="flex items-center space-x-1">
-                            <span class="font-bold text-white text-xs">Cholon.vn</span>
-                            <span class="bg-red-600 text-white text-xs px-1.5 py-0.5 rounded font-bold">LIVE</span>
-                        </div>
-                        <p class="text-white/70 text-xs">Siêu Thị Điện Máy</p>
-                    </div>
+                    <span class="bg-red-600 text-white text-xs px-2 py-0.5 rounded font-bold">LIVE</span>
                 </div>
                 <a 
                     href="tel:19002628"
@@ -81,33 +73,56 @@
             </div>
         </div>
 
-        <!-- Right Side - Compact Product Info -->
+        <!-- Right Side - Compact Product Carousel -->
         <div class="absolute right-3 z-40 product-mini" style="bottom: calc(85px + env(safe-area-inset-bottom));">
-            <div class="bg-white/95 backdrop-blur rounded-2xl p-3 shadow-2xl max-w-[140px]">
-                <div class="relative mb-2">
-                    <img 
-                        src="https://cdn.shopify.com/s/files/1/0652/7483/9139/files/ban-ui-hoi-nuoc-philips-dst203090-multi-0_450_png.webp?v=1761726766" 
-                        alt="Product"
-                        class="w-full h-24 object-contain rounded-lg"
-                    />
-                    <div class="absolute -top-1 -right-1 bg-red-600 text-white text-xs px-1.5 py-0.5 rounded-full font-bold">
-                        -40%
+            <div class="bg-white/95 backdrop-blur rounded-2xl p-3 shadow-2xl max-w-[140px]" id="productCard">
+                <button onclick="minimizeProductCard()" class="absolute -top-2 -right-2 bg-gray-800 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs shadow-lg">
+                    ✕
+                </button>
+                
+                <!-- Product Carousel Content -->
+                <div id="carouselContent">
+                    <div class="relative mb-2">
+                        <img 
+                            id="productImage"
+                            src="https://cdn.shopify.com/s/files/1/0652/7483/9139/files/ban-ui-hoi-nuoc-philips-dst203090-multi-0_450_png.webp?v=1761726766" 
+                            alt="Product"
+                            class="w-full h-24 object-contain rounded-lg"
+                        />
+                        <div class="absolute -top-1 -right-1 bg-red-600 text-white text-xs px-1.5 py-0.5 rounded-full font-bold">
+                            -40%
+                        </div>
                     </div>
+                    <h3 id="productName" class="text-xs font-bold text-gray-800 line-clamp-2 mb-1 leading-tight">
+                        Bàn Ủi Hơi Nước Philips
+                    </h3>
+                    <div id="productPrice" class="text-red-600 font-bold text-sm mb-2">
+                        1,029K
+                    </div>
+                    <a
+                        id="productLink"
+                        href="https://dienmaycholon.com"
+                        target="_blank"
+                        class="w-full bg-red-600 text-white py-1.5 rounded-lg font-bold text-xs text-center block hover:bg-red-700 transition"
+                    >
+                        Mua Ngay
+                    </a>
                 </div>
-                <h3 class="text-xs font-bold text-gray-800 line-clamp-2 mb-1 leading-tight">
-                    Bàn Ủi Hơi Nước Philips
-                </h3>
-                <div class="text-red-600 font-bold text-sm mb-2">
-                    1,029K
+                
+                <!-- Carousel Dots -->
+                <div class="flex justify-center space-x-1 mt-2" id="carouselDots">
+                    <!-- Dots will be added by JavaScript -->
                 </div>
-                <a
-                    href="https://dienmaycholon.com"
-                    target="_blank"
-                    class="w-full bg-red-600 text-white py-1.5 rounded-lg font-bold text-xs text-center block hover:bg-red-700 transition"
-                >
-                    Mua Ngay
-                </a>
             </div>
+        </div>
+
+        <!-- Minimized Product Button -->
+        <div class="hidden absolute right-3 z-40" style="bottom: calc(85px + env(safe-area-inset-bottom));" id="productMinimized">
+            <button onclick="showProductCard()" class="bg-red-600 text-white p-3 rounded-full shadow-2xl">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+            </button>
         </div>
 
         <!-- Bottom Action Bar - Clean & Accessible -->
@@ -119,7 +134,7 @@
                         class="flex-1 bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3.5 rounded-full font-bold text-sm shadow-lg flex items-center justify-center space-x-1"
                     >
                         <span>📞</span>
-                        <span>Tư vấn miễn phí</span>
+                        <span>Gọi lại cho tôi</span>
                     </button>
                     <button
                         onclick="openProductList()"
@@ -127,6 +142,14 @@
                     >
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                    </button>
+                    <button
+                        onclick="shareStream()"
+                        class="bg-white text-gray-900 p-3.5 rounded-full font-bold shadow-lg"
+                    >
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                         </svg>
                     </button>
                 </div>
@@ -299,6 +322,44 @@
 
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwKv7j9LyBqar7axkLzSu2bK4z_SoVF2r-9_8iUxCv1N5aVKJJGrM1vssxiGM4nRTWDyQ/exec';
 
+        // Featured products for carousel (first 3)
+        const FEATURED_PRODUCTS = PRODUCTS.slice(0, 3);
+        let currentProductIndex = 0;
+        let carouselInterval;
+
+        // Product carousel functions
+        function updateProductCarousel(index) {
+            const product = FEATURED_PRODUCTS[index];
+            document.getElementById('productImage').src = product.image;
+            document.getElementById('productName').textContent = product.name;
+            document.getElementById('productPrice').textContent = product.price.replace(',000₫', 'K').replace('₫', '');
+            document.getElementById('productLink').href = product.url;
+            
+            // Update dots
+            updateCarouselDots(index);
+        }
+
+        function updateCarouselDots(activeIndex) {
+            const dotsContainer = document.getElementById('carouselDots');
+            dotsContainer.innerHTML = FEATURED_PRODUCTS.map((_, index) => 
+                `<div class="w-1.5 h-1.5 rounded-full ${index === activeIndex ? 'bg-red-600' : 'bg-gray-300'} transition-colors"></div>`
+            ).join('');
+        }
+
+        function startProductCarousel() {
+            updateCarouselDots(0);
+            carouselInterval = setInterval(() => {
+                currentProductIndex = (currentProductIndex + 1) % FEATURED_PRODUCTS.length;
+                updateProductCarousel(currentProductIndex);
+            }, 5000); // Change product every 5 seconds
+        }
+
+        function stopProductCarousel() {
+            if (carouselInterval) {
+                clearInterval(carouselInterval);
+            }
+        }
+
         // Load products into grid
         function loadProducts() {
             const grid = document.getElementById('productGrid');
@@ -404,8 +465,43 @@
             }
         }
 
+        // Product card minimize/show
+        function minimizeProductCard() {
+            document.getElementById('productCard').parentElement.classList.add('hidden');
+            document.getElementById('productMinimized').classList.remove('hidden');
+            stopProductCarousel();
+        }
+
+        function showProductCard() {
+            document.getElementById('productCard').parentElement.classList.remove('hidden');
+            document.getElementById('productMinimized').classList.add('hidden');
+            startProductCarousel();
+        }
+
+        // Share function
+        async function shareStream() {
+            const shareData = {
+                title: 'Cholon.vn Live Shopping - Giảm đến 50%',
+                text: 'Xem livestream siêu sale 11.11 - 13.11 tại Điện Máy Chợ Lớn! 🔥',
+                url: window.location.href
+            };
+
+            try {
+                if (navigator.share) {
+                    await navigator.share(shareData);
+                } else {
+                    // Fallback: Copy to clipboard
+                    await navigator.clipboard.writeText(window.location.href);
+                    alert('✅ Link đã được sao chép! Chia sẻ cho bạn bè nhé!');
+                }
+            } catch (err) {
+                console.log('Share cancelled or failed:', err);
+            }
+        }
+
         // Initialize
         loadProducts();
+        startProductCarousel();
     </script>
 </body>
 </html>
