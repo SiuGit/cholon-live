@@ -44,7 +44,7 @@
         <iframe
             id="videoFrame"
             class="absolute inset-0 w-full h-full"
-            src="https://www.youtube.com/embed/mDtirXB6ShA"
+            src=""
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
         ></iframe>
@@ -58,46 +58,48 @@
                             src="logo.png" 
                             alt="Cholon.vn" 
                             class="h-7 w-auto object-contain"
+                            onerror="this.style.display='none'"
                         >
                     </div>
                     <span class="bg-red-600 text-white text-xs px-2 py-0.5 rounded font-bold">LIVE</span>
                 </div>
                 <a 
-                    href="tel:19002628"
+                    href="#"
+                    id="hotlineBtn"
                     class="flex items-center space-x-1 bg-blue-600 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg"
                 >
                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
-                    <span>1900.2628</span>
+                    <span id="hotlineText"></span>
                 </a>
             </div>
         </div>
 
         <!-- Right Side - Compact Product Carousel -->
-        <div class="absolute right-3 z-40 product-mini" style="bottom: calc(85px + env(safe-area-inset-bottom));">
-            <div class="bg-white/95 backdrop-blur rounded-2xl p-3 shadow-2xl max-w-[140px]" id="productCard">
-                <button onclick="minimizeProductCard()" class="absolute -top-2 -right-2 bg-gray-800 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs shadow-lg">
+        <div class="absolute right-2 z-40 product-mini" style="bottom: calc(100px + env(safe-area-inset-bottom));">
+            <div class="bg-white/95 backdrop-blur rounded-2xl p-2.5 shadow-2xl max-w-[130px]" id="productCard">
+                <button onclick="minimizeProductCard()" class="absolute -top-2 -right-2 bg-gray-800 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs shadow-lg z-10">
                     ✕
                 </button>
                 
                 <!-- Product Carousel Content -->
                 <div id="carouselContent">
-                    <div class="relative mb-2">
+                    <div class="relative mb-1.5">
                         <img 
                             id="productImage"
                             src="https://cdn.shopify.com/s/files/1/0652/7483/9139/files/ban-ui-hoi-nuoc-philips-dst203090-multi-0_450_png.webp?v=1761726766" 
                             alt="Product"
-                            class="w-full h-24 object-contain rounded-lg"
+                            class="w-full h-20 object-contain rounded-lg"
                         />
-                        <div class="absolute -top-1 -right-1 bg-red-600 text-white text-xs px-1.5 py-0.5 rounded-full font-bold">
+                        <div class="absolute -top-1 -right-1 bg-red-600 text-white text-xs px-1.5 py-0.5 rounded-full font-bold shadow">
                             -40%
                         </div>
                     </div>
-                    <h3 id="productName" class="text-xs font-bold text-gray-800 line-clamp-2 mb-1 leading-tight">
+                    <h3 id="productName" class="text-xs font-bold text-gray-800 line-clamp-2 mb-1 leading-tight" style="min-height: 32px;">
                         Bàn Ủi Hơi Nước Philips
                     </h3>
-                    <div id="productPrice" class="text-red-600 font-bold text-sm mb-2">
+                    <div id="productPrice" class="text-red-600 font-bold text-sm mb-1.5">
                         1,029K
                     </div>
                     <a
@@ -111,16 +113,21 @@
                 </div>
                 
                 <!-- Carousel Dots -->
-                <div class="flex justify-center space-x-1 mt-2" id="carouselDots">
+                <div class="flex justify-center space-x-1 mt-1.5" id="carouselDots">
                     <!-- Dots will be added by JavaScript -->
+                </div>
+                
+                <!-- Swipe hint (shows first time only) -->
+                <div id="swipeHint" class="text-center mt-1 text-xs text-gray-500 animate-pulse">
+                    👈 Vuốt
                 </div>
             </div>
         </div>
 
         <!-- Minimized Product Button -->
-        <div class="hidden absolute right-3 z-40" style="bottom: calc(85px + env(safe-area-inset-bottom));" id="productMinimized">
-            <button onclick="showProductCard()" class="bg-red-600 text-white p-3 rounded-full shadow-2xl">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="hidden absolute right-2 z-40" style="bottom: calc(100px + env(safe-area-inset-bottom));" id="productMinimized">
+            <button onclick="showProductCard()" class="bg-red-600 text-white p-2.5 rounded-full shadow-2xl animate-pulse">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
             </button>
@@ -128,8 +135,8 @@
 
         <!-- Bottom Action Bar - Clean & Accessible -->
         <div class="absolute bottom-0 left-0 right-0 z-50">
-            <div class="px-3 pt-4" style="padding-bottom: max(24px, env(safe-area-inset-bottom)); background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
-                <div class="flex items-center space-x-2">
+            <div class="px-3 pt-3" style="padding-bottom: max(env(safe-area-inset-bottom), 20px); background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);">
+                <div class="flex items-center space-x-2 mb-2">
                     <button
                         onclick="openLeadForm()"
                         class="flex-1 bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3.5 rounded-full font-bold text-sm shadow-lg flex items-center justify-center space-x-1"
@@ -261,72 +268,27 @@
     </div>
 
     <script>
+        // Load configuration from config.js
+        const GOOGLE_SCRIPT_URL = CONFIG.googleSheetUrl;
+
+        // Initialize page with config
+        function initializePage() {
+            // Set video source
+            document.getElementById('videoFrame').src = CONFIG.videoUrl;
+            
+            // Set hotline
+            const hotlineBtn = document.getElementById('hotlineBtn');
+            hotlineBtn.href = `tel:${CONFIG.hotline.replace(/\./g, '')}`;
+            document.getElementById('hotlineText').textContent = CONFIG.hotline;
+        }
+
         // Product data
-        const PRODUCTS = [
-            {
-                id: 1,
-                name: "Bàn Ủi Hơi Nước Philips DST2030/90",
-                price: "1,029,000₫",
-                image: "https://cdn.shopify.com/s/files/1/0652/7483/9139/files/ban-ui-hoi-nuoc-philips-dst203090-multi-0_450_png.webp?v=1761726766",
-                url: "https://dienmaycholon.com"
-            },
-            {
-                id: 2,
-                name: "Siêu sắc thuốc 3.2 lít Vạn An VA 58-HM",
-                price: "550,000₫",
-                image: "https://cdn.shopify.com/s/files/1/0652/7483/9139/files/sieu-sac-thuoc-32-lit-van-an-va-58hm-multi-0_450_png.webp?v=1761726765",
-                url: "https://dienmaycholon.com"
-            },
-            {
-                id: 3,
-                name: "Bình Đun Siêu Tốc Kangaroo KGWK18I2 1.8 Lít",
-                price: "270,000₫",
-                image: "https://cdn.shopify.com/s/files/1/0652/7483/9139/files/binh-dun-sieu-toc-kangaroo-kgwk18i2-18-lit-multi-0_450_png.webp?v=1761726764",
-                url: "https://dienmaycholon.com"
-            },
-            {
-                id: 4,
-                name: "Ấm Siêu Tốc Inox Sunhouse SHD1057",
-                price: "195,000₫",
-                image: "https://cdn.shopify.com/s/files/1/0652/7483/9139/files/am-sieu-toc-inox-sunhouse-shd1057-multi-0_450_png.webp?v=1761726763",
-                url: "https://dienmaycholon.com"
-            },
-            {
-                id: 5,
-                name: "Bàn Chải Đánh Răng Điện USMILE P1",
-                price: "1,490,000₫",
-                image: "https://cdn.shopify.com/s/files/1/0652/7483/9139/files/ban-chai-danh-rang-dien-usmile-p1-mau-xanh-multi-0_450_png.webp?v=1761726762",
-                url: "https://dienmaycholon.com"
-            },
-            {
-                id: 6,
-                name: "Bàn ủi Bluestone DIB-3726 1300W",
-                price: "369,000₫",
-                image: "https://cdn.shopify.com/s/files/1/0652/7483/9139/files/ban-ui-bluestone-dib3726-1300w-multi-0_450_png.webp?v=1761726762",
-                url: "https://dienmaycholon.com"
-            },
-            {
-                id: 7,
-                name: "Bàn Ủi Hơi Nước Cầm Tay Bear GTJ-B10S1",
-                price: "728,000₫",
-                image: "https://cdn.shopify.com/s/files/1/0652/7483/9139/files/ban-ui-hoi-nuoc-cam-tay-bear-gtjb10s1-hang-quoc-te-ban-tieng-anh-multi-0_450_png.webp?v=1761726760",
-                url: "https://dienmaycholon.com"
-            },
-            {
-                id: 8,
-                name: "Bàn ủi hơi nước Sunhouse SHD2065 1600W",
-                price: "385,000₫",
-                image: "https://cdn.shopify.com/s/files/1/0652/7483/9139/files/ban-ui-hoi-nuoc-sunhouse-shd2065-1600w-multi-0_450_png.webp?v=1761726760",
-                url: "https://dienmaycholon.com"
-            }
-        ];
-
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwKv7j9LyBqar7axkLzSu2bK4z_SoVF2r-9_8iUxCv1N5aVKJJGrM1vssxiGM4nRTWDyQ/exec';
-
         // Featured products for carousel (first 3)
         const FEATURED_PRODUCTS = PRODUCTS.slice(0, 3);
         let currentProductIndex = 0;
         let carouselInterval;
+        let touchStartX = 0;
+        let touchEndX = 0;
 
         // Product carousel functions
         function updateProductCarousel(index) {
@@ -338,6 +300,12 @@
             
             // Update dots
             updateCarouselDots(index);
+            
+            // Hide swipe hint after first interaction
+            const hint = document.getElementById('swipeHint');
+            if (hint) {
+                hint.style.display = 'none';
+            }
         }
 
         function updateCarouselDots(activeIndex) {
@@ -352,13 +320,59 @@
             carouselInterval = setInterval(() => {
                 currentProductIndex = (currentProductIndex + 1) % FEATURED_PRODUCTS.length;
                 updateProductCarousel(currentProductIndex);
-            }, 5000); // Change product every 5 seconds
+            }, 5000);
+            
+            // Hide hint after 3 seconds
+            setTimeout(() => {
+                const hint = document.getElementById('swipeHint');
+                if (hint) hint.style.display = 'none';
+            }, 3000);
         }
 
         function stopProductCarousel() {
             if (carouselInterval) {
                 clearInterval(carouselInterval);
             }
+        }
+
+        function nextProduct() {
+            currentProductIndex = (currentProductIndex + 1) % FEATURED_PRODUCTS.length;
+            updateProductCarousel(currentProductIndex);
+            stopProductCarousel();
+            startProductCarousel();
+        }
+
+        function prevProduct() {
+            currentProductIndex = (currentProductIndex - 1 + FEATURED_PRODUCTS.length) % FEATURED_PRODUCTS.length;
+            updateProductCarousel(currentProductIndex);
+            stopProductCarousel();
+            startProductCarousel();
+        }
+
+        // Touch swipe detection
+        function handleTouchStart(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }
+
+        function handleTouchEnd(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextProduct(); // Swipe left
+            }
+            if (touchEndX > touchStartX + 50) {
+                prevProduct(); // Swipe right
+            }
+        }
+
+        // Add touch listeners to product card
+        const productCard = document.getElementById('productCard');
+        if (productCard) {
+            productCard.addEventListener('touchstart', handleTouchStart, false);
+            productCard.addEventListener('touchend', handleTouchEnd, false);
         }
 
         // Load products into grid
@@ -501,6 +515,7 @@
         }
 
         // Initialize
+        initializePage();
         loadProducts();
         startProductCarousel();
     </script>
